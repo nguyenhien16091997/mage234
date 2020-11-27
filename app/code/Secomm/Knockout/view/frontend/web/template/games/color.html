@@ -1,0 +1,20 @@
+<!-- ko if: canDisplay() -->
+    <div class="gamesColor">
+        <div class="wrapper">
+            <div class="mapConroller input-group">
+                <label for="mapRow">Row</label>
+                <input id="mapRow" type="text" name="mapRow" data-bind="value: row(), event: {change: changeRow()}"/>
+
+                <label for="mapColumn">Column</label>
+                <input id="mapColumn" type="text" name="mapColumn" data-bind="value: column(), event: {change: changeColumn()}"/>
+            </div>
+            <div class="mapConroller">
+                <label for="colorHex">Color hex</label>
+                <input id="colorHex" type="text" data-bind="value: colorHex"/>
+            </div>
+            <div class="colorMap" data-bind="foreach: mapCoordinators(), afterRender: buildColorMap(), style: {'width': widthBoxCaculation() + 'px'}">
+                <div class="colorSquare" data-bind="style: {'background-color': color}, event: {mouseover: $parent.updateColorHex(color)}"></div>
+            </div>
+        </div>
+    </div>
+<!-- /ko -->

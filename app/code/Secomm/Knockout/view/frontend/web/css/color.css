@@ -1,0 +1,24 @@
+.colorSquare {
+    width: 100px;
+    height: 100px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.mapConroller input {
+    width: inherit;
+}
+
+.mapConroller,
+.colorMap {
+    margin-top: 20px;
+}
+
+.colorMap .colorSquare {
+    display: inline-block;
+}
+
+.gamesColor {
+    width: 100%;
+    overflow: auto;
+}

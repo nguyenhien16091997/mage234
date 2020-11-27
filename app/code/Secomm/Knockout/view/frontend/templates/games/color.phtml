@@ -1,0 +1,33 @@
+<?php
+/**
+ * @var \Secomm\Knockout\Block\Games\Color $block
+ */
+?>
+
+<div id="knockoutjs" class="games-color" data-bind="scope:'knockoutjs-games-color'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script>
+        window.techtalk = {
+            knockoutConfig : {
+                isActive: <?= $block->getIsActive() ?>,
+                initalRow: 5,
+                initalColumn: 5
+            }
+        }
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "knockoutjs-games-color": {
+                            "component": "Secomm_Knockout/js/games/color"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>
+
+
