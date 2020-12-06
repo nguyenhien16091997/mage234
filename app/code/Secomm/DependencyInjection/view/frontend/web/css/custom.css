@@ -1,0 +1,15 @@
+#area-chart,
+#line-chart,
+#bar-chart,
+#stacked,
+#pie-chart{
+    min-height: 250px;
+}
+
+.chart-container .text-center {
+    min-height: 400px;
+}
+
+.dependencyinjection-analyze-dashboard.page-layout-3columns .sidebar-additional {
+    width: 40%;
+}

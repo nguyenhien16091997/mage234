@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Secomm_DependencyInjection::css/style.css" />
+        <css src="Secomm_DependencyInjection::css/custom.css" />
+    </head>
+    <referenceContainer name="content">
+        <block name="header.vm" template="Secomm_DependencyInjection::analyze/header.phtml">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Secomm\DependencyInjection\Viewmodel\Analyze\Header</argument>
+            </arguments>
+        </block>
+        <block name="sc_analyze_dashboard" class="Secomm\DependencyInjection\Block\Analyze\Dashboard" template="Secomm_DependencyInjection::analyze/dashboard.phtml">
+            <arguments>
+                <argument name="charts" xsi:type="array">
+                    <item name="0" xsi:type="string">area</item>
+                    <item name="1" xsi:type="string">line</item>
+                    <item name="2" xsi:type="string">bar</item>
+                    <item name="3" xsi:type="string">pie</item>
+                    <item name="4" xsi:type="string">barstacked</item>
+                </argument>
+            </arguments>
+        </block>
+    </referenceContainer>
+    <referenceContainer name="sidebar.additional">
+        <block class="Secomm\DependencyInjection\Block\Analyze\LocationTable" name="analyze_table_location">
+            <action method="setTableTitle">
+                <argument name="title" xsi:type="string">Genaral Information</argument>
+            </action>
+        </block>
+
+        <block class="AnalyzeProfitTable" name="analyze_profit_table"/>
+    </referenceContainer>
+
+    <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+    <referenceBlock name="wishlist_sidebar" remove="true" />
+</page>

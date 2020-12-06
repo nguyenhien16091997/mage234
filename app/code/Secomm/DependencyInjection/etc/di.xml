@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Secomm\DependencyInjection\Block\Analyze\Chart">
+        <arguments>
+            <argument name="chartNames" xsi:type="array">
+                <item name="area" xsi:type="string">Area Chart</item>
+                <item name="line" xsi:type="string">Line Chart</item>
+                <item name="bar" xsi:type="string">Bar Chart</item>
+                <item name="pie" xsi:type="string">Pie Chart</item>
+                <item name="barstacked" xsi:type="string">BarStacked Chart</item>
+            </argument>
+            <argument name="chartClasses" xsi:type="array">
+                <item name="area" xsi:type="string">Secomm\DependencyInjection\Block\Analyze\Chart\Area</item>
+                <item name="line" xsi:type="string">Secomm\DependencyInjection\Block\Analyze\Chart\Line</item>
+                <item name="bar" xsi:type="string">Secomm\DependencyInjection\Block\Analyze\Chart\Bar</item>
+                <item name="pie" xsi:type="string">Secomm\DependencyInjection\Block\Analyze\Chart\Pie</item>
+                <item name="barstacked" xsi:type="string">Secomm\DependencyInjection\Block\Analyze\Chart\Barstacked</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Secomm\DependencyInjection\Block\Analyze\ChartInterface" type="Secomm\DependencyInjection\Block\Analyze\Chart" />
+    <virtualType name="Secomm\DependencyInjection\Block\Analyze\LocationTable" type="Secomm\DependencyInjection\Block\Analyze\Table">
+        <arguments>
+            <argument name="displayableColumns" xsi:type="array">
+                <item name="name" xsi:type="string">name</item>
+                <item name="address" xsi:type="string">address</item>
+                <item name="created_date" xsi:type="string">created_date</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AnalyzeProfitTable" type="Secomm\DependencyInjection\Block\Analyze\Table">
+        <arguments>
+            <argument name="displayableColumns" xsi:type="array">
+                <item name="name" xsi:type="string">name</item>
+                <item name="last_year_profit" xsi:type="string">last_year_profit</item>
+                <item name="this_year_profit" xsi:type="string">this_year_profit</item>
+            </argument>
+            <argument name="tableTitle" xsi:type="string">Previous / Current Profit</argument>
+        </arguments>
+    </virtualType>
+</config>

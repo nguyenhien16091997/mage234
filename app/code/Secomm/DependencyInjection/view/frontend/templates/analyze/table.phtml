@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var $block \Secomm\DependencyInjection\Block\Analyze\Table
+ */
+?>
+<h2><?= $block->getTableTitle()?></h2>
+<table>
+    <thead>
+    <?php foreach ($block->getTableHeader() as $header) : ?>
+    <th>
+        <?= $header?>
+    </th>
+    <?php endforeach;?>
+    </thead>
+    <tbody>
+    <?php foreach ($block->getTableData() as $lineData) : ?>
+    <tr>
+        <?php foreach ($lineData as $data) : ?>
+        <td>
+            <?php if (is_numeric($data)) : ?>
+                <?= $block->formatNumer($data)?>
+            <?php else:?>
+                <?= $data?>
+            <?php endif;?>
+        </td>
+        <?php endforeach;?>
+    </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>
