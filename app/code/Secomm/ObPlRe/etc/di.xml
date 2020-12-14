@@ -1,0 +1,10 @@
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="\Controller\Index\Index">
+        <plugin name="Secomm_ObPlRe_Demo_Plugin" type="Secomm\ObPlRe\Plugin\DemoPlugin" sortOrder="10" disabled="false"  />
+    </type>
+    <type name="Magento\Theme\Block\Html\Topmenu">
+        <plugin name="Add_Home_Link_Top_Menu" type="Secomm\ObPlRe\Plugin\Block\Html\TopmenuPlugin" sortOrder="10" disabled="false"  />
+    </type>
+    <preference for="Magento\Catalog\Block\Product\View" type="Secomm\ObPlRe\Block\Catalog\Product\View" />
+</config>
