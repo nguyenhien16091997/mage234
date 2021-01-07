@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Secomm_Api::helloworld" title="Api Demo" module="Secomm_Api" sortOrder="51" resource="Secomm_Api::helloworld"/>
+        <add id="Secomm_Api::post" title="Manage Posts" module="Secomm_Api" sortOrder="10" action="api/post" resource="Secomm_Api::post" parent="Secomm_Api::helloworld"/>
+     </menu>
+</config>
