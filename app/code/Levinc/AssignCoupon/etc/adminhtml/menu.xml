@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Levinc_AssignCoupon::menu" title="Levinc" module="Levinc_AssignCoupon" sortOrder="51" resource="Levinc_AssignCoupon::menu"/>
+        <add id="Levinc_AssignCoupon::asigncoupon"
+             title="Assign Personal Coupon"
+             module="Levinc_AssignCoupon"
+             translate="title"
+             sortOrder="9998"
+             action="assigncoupon/assign/index"
+             parent="Levinc_AssignCoupon::menu"
+             resource="Levinc_AssignCoupon::config"/>
+    </menu>
+</config>

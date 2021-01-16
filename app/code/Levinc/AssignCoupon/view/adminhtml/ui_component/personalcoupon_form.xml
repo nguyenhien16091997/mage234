@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">personalcoupon_form.personalcoupon_listing_data_source</item>
+            <item name="deps" xsi:type="string">personalcoupon_form.personalcoupon_listing_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Tag</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">personalcoupon_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">*/*/</item>
+            </item>
+            <item name="save" xsi:type="string">Levinc\AssignCoupon\Block\Adminhtml\SaveButton</item>
+        </item>
+    </argument>
+    <dataSource name="personalcoupon_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">personalcoupon_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <fieldset name="customer_selection">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Sellect Customer</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="opened" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <container name="open_button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="boolean">false</item>
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                        <item name="title" xsi:type="string" translate="true">Add Customer</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">personalcoupon_form.personalcoupon_form.general.customer_selection.customer_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="targetName" xsi:type="string">personalcoupon_form.personalcoupon_form.general.customer_selection.customer_modal.customer_grid</item>
+                                <item name="actionName" xsi:type="string">render</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </container>
+            <container name="customer_modal">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="componentType" xsi:type="string">modal</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/modal/modal-component</item>
+                        <item name="options" xsi:type="array">
+                            <item name="type" xsi:type="string">slide</item>
+                            <item name="title" xsi:type="string" translate="true">Add Customers</item>
+                            <item name="buttons" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="text" xsi:type="string" translate="true">Cancel</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="string">closeModal</item>
+                                    </item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="text" xsi:type="string" translate="true">Add Selected Customer</item>
+                                    <item name="class" xsi:type="string">action-primary</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="targetName" xsi:type="string">index = customer_grid</item>
+                                            <item name="actionName" xsi:type="string">save</item>
+                                        </item>
+                                        <item name="1" xsi:type="string">closeModal</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <insertListing name="customer_grid">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <!--Avoid admin__scope-old cssclass assign -->
+                            <item name="cssclass" xsi:type="string">posts-grid-insert-listing</item>
+                            <item name="dataScope" xsi:type="string">customer_container</item>
+                            <item name="autoRender" xsi:type="boolean">true</item>
+                            <item name="selectionsProvider" xsi:type="string">customer_listing.customer_listing.customer_columns.ids</item>
+                            <item name="externalProvider" xsi:type="string">customer_listing.customer_listing_data_source</item>
+                            <item name="ns" xsi:type="string">customer_listing</item>
+                            <item name="realTimeLink" xsi:type="boolean">true</item>
+                            <item name="behaviourType" xsi:type="string">edit</item>
+                            <item name="imports" xsi:type="array">
+                                <item name="entity_id" xsi:type="string">${$.provider}:data.entity_id</item>
+                            </item>
+                            <item name="exports" xsi:type="array">
+                                <item name="entity_id" xsi:type="string">${ $.externalProvider }:params.entity_id</item>
+                            </item>
+                            <item name="dataLinks" xsi:type="array">
+                                <item name="imports" xsi:type="boolean">false</item>
+                                <item name="exports" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="externalFilterMode" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+                </insertListing>
+            </container>
+            <container name="customer_container">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                        <item name="componentType" xsi:type="string">dynamicRows</item>
+                        <item name="component" xsi:type="string">Levinc_AssignCoupon/js/dynamic-rows/dynamic-rows-grid</item>
+                        <item name="template" xsi:type="string">Levinc_AssignCoupon/ui/dynamic-rows/templates/grid</item>
+                        <item name="recordTemplate" xsi:type="string">record</item>
+                        <item name="addButton" xsi:type="boolean">false</item>
+                        <item name="columnsHeader" xsi:type="boolean">false</item>
+                        <item name="columnsHeaderAfterRender" xsi:type="boolean">true</item>
+                        <item name="renderDefaultRecord" xsi:type="boolean">false</item>
+                        <item name="deleteButtonLabel" xsi:type="string" translate="true">Remove</item>
+                        <item name="dataScope" xsi:type="string">customer_selection</item>
+                        <item name="identificationProperty" xsi:type="string">entity_id</item>
+                        <item name="identificationDRProperty" xsi:type="string">entity_id</item>
+                        <item name="dataProvider" xsi:type="string">data.customer_container</item>
+                        <item name="positionProvider" xsi:type="string">position</item>
+                        <item name="map" xsi:type="array">
+                            <item name="entity_id" xsi:type="string">entity_id</item>
+                            <item name="name" xsi:type="string">name</item>
+                            <item name="status" xsi:type="string">status</item>
+                        </item>
+                        <item name="imports" xsi:type="array">
+                            <item name="entity_id" xsi:type="string">${$.provider}:data.entity_id</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="entity_id" xsi:type="string">${ $.externalProvider }:params.entity_id</item>
+                        </item>
+                        <item name="links" xsi:type="array">
+                            <item name="insertData" xsi:type="string">${ $.provider }:${ $.dataProvider }</item>
+                        </item>
+                        <item name="dndConfig" xsi:type="array">
+                            <item name="enabled" xsi:type="boolean">false</item>
+                        </item>
+                    </item>
+                </argument>
+                <container name="record">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                            <item name="isTemplate" xsi:type="boolean">true</item>
+                            <item name="positionProvider" xsi:type="string">position</item>
+                            <item name="is_collection" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+<!--                    <listingToolbar>-->
+<!--                        <paging name="listing_paging"/>-->
+<!--                    </listingToolbar>-->
+                    <field name="entity_id">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">entity_id</item>
+                                <item name="label" xsi:type="string" translate="true">ID</item>
+                                <item name="sortOrder" xsi:type="string">10</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="name">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="fit" xsi:type="boolean">false</item>
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">name</item>
+                                <item name="label" xsi:type="string" translate="true">Title</item>
+                                <item name="sortOrder" xsi:type="string">30</item>
+                                <item name="resizeEnabled" xsi:type="boolean">true</item>
+                                <item name="resizeDefaultWidth" xsi:type="string">100</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="status">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Levinc_AssignCoupon/js/dynamic-rows/element/select-label</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">status</item>
+                                <item name="label" xsi:type="string" translate="true">Status</item>
+                                <item name="sortOrder" xsi:type="string">40</item>
+                            </item>
+                            <item name="options" xsi:type="object">Magento\Catalog\Model\Product\Attribute\Source\Status</item>
+                        </argument>
+                    </field>
+                    <actionDelete>
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                                <item name="componentType" xsi:type="string">actionDelete</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Actions</item>
+                                <item name="sortOrder" xsi:type="number">99</item>
+                            </item>
+                        </argument>
+                    </actionDelete>
+                </container>
+            </container>
+        </fieldset>
+        <fieldset name="coupon_selection">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Select Coupon</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="opened" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <container name="open_coupon_button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="boolean">false</item>
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                        <item name="title" xsi:type="string" translate="true">Add Coupon</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">personalcoupon_form.personalcoupon_form.general.coupon_selection.coupon_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="targetName" xsi:type="string">personalcoupon_form.personalcoupon_form.general.coupon_selection.coupon_modal.coupon_grid</item>
+                                <item name="actionName" xsi:type="string">render</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </container>
+            <container name="coupon_modal">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="componentType" xsi:type="string">modal</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/modal/modal-component</item>
+                        <item name="options" xsi:type="array">
+                            <item name="type" xsi:type="string">slide</item>
+                            <item name="title" xsi:type="string" translate="true">Add Coupon</item>
+                            <item name="buttons" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="text" xsi:type="string" translate="true">Cancel</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="string">closeModal</item>
+                                    </item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="text" xsi:type="string" translate="true">Add Selected Coupon</item>
+                                    <item name="class" xsi:type="string">action-primary</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="targetName" xsi:type="string">index = coupon_grid</item>
+                                            <item name="actionName" xsi:type="string">save</item>
+                                        </item>
+                                        <item name="1" xsi:type="string">closeModal</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <insertListing name="coupon_grid">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="cssclass" xsi:type="string">coupon-grid-insert-listing</item>
+                            <item name="dataScope" xsi:type="string">coupon_container</item>
+                            <item name="autoRender" xsi:type="boolean">true</item>
+                            <item name="selectionsProvider" xsi:type="string">coupon_listing.coupon_listing.columns.ids</item>
+                            <item name="externalProvider" xsi:type="string">coupon_listing.salesrule_listing_data_source</item>
+                            <item name="ns" xsi:type="string">coupon_listing</item>
+                            <item name="realTimeLink" xsi:type="boolean">true</item>
+                            <item name="behaviourType" xsi:type="string">edit</item>
+                            <item name="imports" xsi:type="array">
+                                <item name="coupon_id" xsi:type="string">${$.provider}:data.coupon_id</item>
+                            </item>
+                            <item name="exports" xsi:type="array">
+                                <item name="coupon_id" xsi:type="string">${ $.externalProvider }:params.coupon_id</item>
+                            </item>
+                            <item name="dataLinks" xsi:type="array">
+                                <item name="imports" xsi:type="boolean">false</item>
+                                <item name="exports" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="externalFilterMode" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+                </insertListing>
+            </container>
+            <container name="coupon_container">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                        <item name="componentType" xsi:type="string">dynamicRows</item>
+                        <item name="component" xsi:type="string">Levinc_AssignCoupon/js/dynamic-rows/dynamic-rows-grid</item>
+                        <item name="template" xsi:type="string">Levinc_AssignCoupon/ui/dynamic-rows/templates/grid</item>
+                        <item name="recordTemplate" xsi:type="string">record</item>
+                        <item name="addButton" xsi:type="boolean">false</item>
+                        <item name="columnsHeader" xsi:type="boolean">false</item>
+                        <item name="columnsHeaderAfterRender" xsi:type="boolean">true</item>
+                        <item name="renderDefaultRecord" xsi:type="boolean">false</item>
+                        <item name="deleteButtonLabel" xsi:type="string" translate="true">Remove</item>
+                        <item name="dataScope" xsi:type="string">coupon_selection</item>
+                        <item name="identificationProperty" xsi:type="string">coupon_id</item>
+                        <item name="identificationDRProperty" xsi:type="string">coupon_id</item>
+                        <item name="dataProvider" xsi:type="string">data.coupon_container</item>
+                        <item name="positionProvider" xsi:type="string">position</item>
+                        <item name="map" xsi:type="array">
+                            <item name="coupon_id" xsi:type="string">coupon_id</item>
+                            <item name="code" xsi:type="string">code</item>
+                        </item>
+                        <item name="imports" xsi:type="array">
+                            <item name="coupon_id" xsi:type="string">${$.provider}:data.coupon_id</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="coupon_id" xsi:type="string">${ $.externalProvider }:params.coupon_id</item>
+                        </item>
+                        <item name="links" xsi:type="array">
+                            <item name="insertData" xsi:type="string">${ $.provider }:${ $.dataProvider }</item>
+                        </item>
+                        <item name="dndConfig" xsi:type="array">
+                            <item name="enabled" xsi:type="boolean">false</item>
+                        </item>
+                    </item>
+                </argument>
+                <container name="record">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                            <item name="isTemplate" xsi:type="boolean">true</item>
+                            <item name="positionProvider" xsi:type="string">position</item>
+                            <item name="is_collection" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+                    <field name="coupon_id">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">coupon_id</item>
+                                <item name="label" xsi:type="string" translate="true">ID</item>
+                                <item name="sortOrder" xsi:type="string">10</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="code">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">code</item>
+                                <item name="label" xsi:type="string" translate="true">CODE</item>
+                                <item name="sortOrder" xsi:type="string">20</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <actionDelete>
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                                <item name="componentType" xsi:type="string">actionDelete</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Actions</item>
+                                <item name="sortOrder" xsi:type="number">99</item>
+                            </item>
+                        </argument>
+                    </actionDelete>
+                </container>
+            </container>
+        </fieldset>
+    </fieldset>
+</form>
